@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MapView.css';
 
 const routeStops = [
@@ -20,7 +20,16 @@ const pins = [
 ];
 
 export default function MapView({ destination }) {
-  const destName = destination?.name || 'Manali';
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeLocation, setActiveLocation] = useState('');
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      setActiveLocation(searchQuery);
+    }
+  };
+
+  const mapLocation = activeLocation || destination?.name || 'Manali';
   let currentRouteStops = routeStops;
   if (destination && destination.itinerary) {
     currentRouteStops = [];
@@ -48,7 +57,20 @@ export default function MapView({ destination }) {
           <div className="topbar-title">Trip Route</div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Visualize your journey, explore with ease.</div>
         </div>
-        <div className="topbar-actions">
+        <div className="topbar-actions" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', background: 'white', borderRadius: '8px', border: '1px solid var(--border)', padding: '4px 8px', alignItems: 'center' }}>
+            <input
+              type="text"
+              placeholder="Search a place..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '13px', width: '150px' }}
+            />
+            <button onClick={handleSearch} style={{ background: 'var(--primary)', color: 'white', border: 'none', borderRadius: '6px', padding: '4px 10px', fontSize: '12px', cursor: 'pointer', fontWeight: 'bold' }}>
+              Search
+            </button>
+          </div>
           <button className="btn btn-outline btn-sm">≡ List View</button>
           <div className="avatar">A</div>
         </div>
@@ -58,7 +80,7 @@ export default function MapView({ destination }) {
         <div>
           <div className="map-container" style={{ position: 'relative' }}>
             <iframe
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(destName)}&t=&z=11&ie=UTF8&iwloc=&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(mapLocation)}&t=&z=11&ie=UTF8&iwloc=&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0, position: 'absolute', top: 0, left: 0 }}
