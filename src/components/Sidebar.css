@@ -1,0 +1,127 @@
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.logo-icon svg { color: white; }
+
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  margin-bottom: 2px;
+}
+.nav-item:hover { background: #F3F0FF; color: var(--primary); }
+.nav-item.active { background: #EDE9FE; color: var(--primary); }
+.nav-item svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+.sidebar-footer {
+  padding: 12px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.toggle-switch {
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+.upgrade-card {
+  background: linear-gradient(135deg, #7C3AED, #A855F7);
+  border-radius: 12px;
+  padding: 14px;
+  margin: 8px 0;
+  color: white;
+}
+.upgrade-card h4 { font-size: 12px; font-weight: 800; margin-bottom: 4px; }
+.upgrade-card p { font-size: 10.5px; opacity: 0.85; margin-bottom: 10px; line-height: 1.4; }
+.upgrade-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+}
+
+@media (max-width: 1100px) {
+  .nav-item span,
+  .logo-text,
+  .dark-mode-toggle span:first-child,
+  .upgrade-card { display: none; }
+  .nav-item { justify-content: center; }
+  .sidebar-logo { justify-content: center; }
+}

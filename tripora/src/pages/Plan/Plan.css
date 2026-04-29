@@ -1,0 +1,90 @@
+.step-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 28px;
+}
+.step { display: flex; align-items: center; gap: 8px; }
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+.step.active .step-num { background: var(--primary); color: white; }
+.step.done .step-num { background: var(--green); color: white; }
+.step.inactive .step-num { background: var(--border); color: var(--text-muted); }
+.step-label { font-size: 12px; font-weight: 700; }
+.step.active .step-label { color: var(--primary); }
+.step.inactive .step-label { color: var(--text-muted); }
+.step-line { flex: 1; height: 2px; background: var(--border); margin: 0 8px; }
+.step-line.done { background: var(--green); }
+
+.vibe-select-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.vibe-select-card {
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.vibe-select-card:hover { border-color: var(--primary); background: #F5F3FF; }
+.vibe-select-card.selected { border-color: var(--primary); background: #EDE9FE; }
+.vibe-big-icon { font-size: 32px; margin-bottom: 8px; }
+
+.trip-option-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.trip-option label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+.chip:hover, .chip.active {
+  border-color: var(--primary);
+  background: #EDE9FE;
+  color: var(--primary);
+}
+
+.duration-input { display: flex; align-items: center; gap: 10px; }
+.duration-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+.duration-val { font-size: 15px; font-weight: 800; }
