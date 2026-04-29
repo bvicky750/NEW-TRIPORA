@@ -1,28 +1,33 @@
 import React from 'react';
 import './Budget.css';
 
-export default function Budget({ tripData }) {
+export default function Budget({ tripData, destination }) {
   // Calculate budget based on trip parameters
-  const days = tripData?.days || 5;
-  const destType = tripData?.destType || 'Any';
-  
+  const days = destination?.itinerary?.length || tripData?.days || 5;
+  const destName = destination?.name || tripData?.destType || 'Any';
+
   // Base daily budget per person (in rupees)
   let dailyBudget = 3000;
-  
-  // Adjust based on destination type
-  const destTypeMultiplier = {
-    'Any': 1,
-    'Beach': 1.3,
-    'Mountains': 1.1,
-    'City': 1.4,
-    'Culture': 1.2,
-  };
-  
-  dailyBudget = dailyBudget * (destTypeMultiplier[destType] || 1);
-  
+
+  if (destination?.name === 'Bali') dailyBudget = 6000;
+  else if (destination?.name === 'Switzerland') dailyBudget = 15000;
+  else if (destination?.name === 'Goa') dailyBudget = 4000;
+  else if (destination?.name === 'Manali') dailyBudget = 2500;
+  else {
+    // Adjust based on destination type
+    const destTypeMultiplier = {
+      'Any': 1,
+      'Beach': 1.3,
+      'Mountains': 1.1,
+      'City': 1.4,
+      'Culture': 1.2,
+    };
+    dailyBudget = dailyBudget * (destTypeMultiplier[tripData?.destType || 'Any'] || 1);
+  }
+
   // Calculate total budget
   const totalBudget = Math.round(dailyBudget * days);
-  
+
   // Budget breakdown percentages
   const breakdown = {
     transport: Math.round(totalBudget * 0.24),
@@ -31,7 +36,7 @@ export default function Budget({ tripData }) {
     activities: Math.round(totalBudget * 0.15),
     shopping: Math.round(totalBudget * 0.07),
   };
-  
+
   const circumference = 282.7;
   const transport_dash = (breakdown.transport / totalBudget) * circumference;
   const accommodation_dash = (breakdown.accommodation / totalBudget) * circumference;
@@ -61,8 +66,8 @@ export default function Budget({ tripData }) {
     <div className="page-wrapper">
       <div className="topbar">
         <div>
-          <div className="topbar-title">Trip Budget</div>
-          <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{days} Days • {destType} • Est. ₹{totalBudget.toLocaleString()}</div>
+          <div className="topbar-title">{destination?.name ? `${destination.name} Trip Budget` : 'Trip Budget'}</div>
+          <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{days} Days • {destName} • Est. ₹{totalBudget.toLocaleString()}</div>
         </div>
         <div className="topbar-actions">
           <button className="btn btn-outline btn-sm">↗ Export</button>
@@ -76,11 +81,11 @@ export default function Budget({ tripData }) {
           <div style={{ margin: '20px 0' }}>
             <div className="donut-chart">
               <svg className="donut-svg" viewBox="0 0 160 160">
-                <circle cx="80" cy="80" r="60" fill="none" stroke="#3B82F6" strokeWidth="22" strokeDasharray={`${transport_dash} ${circumference}`} strokeDashoffset="0"/>
-                <circle cx="80" cy="80" r="60" fill="none" stroke="#8B5CF6" strokeWidth="22" strokeDasharray={`${accommodation_dash} ${circumference}`} strokeDashoffset={`-${transport_dash}`}/>
-                <circle cx="80" cy="80" r="60" fill="none" stroke="#F59E0B" strokeWidth="22" strokeDasharray={`${food_dash} ${circumference}`} strokeDashoffset={`-${transport_dash + accommodation_dash}`}/>
-                <circle cx="80" cy="80" r="60" fill="none" stroke="#10B981" strokeWidth="22" strokeDasharray={`${activities_dash} ${circumference}`} strokeDashoffset={`-${transport_dash + accommodation_dash + food_dash}`}/>
-                <circle cx="80" cy="80" r="60" fill="none" stroke="#EF4444" strokeWidth="22" strokeDasharray={`${shopping_dash} ${circumference}`} strokeDashoffset={`-${transport_dash + accommodation_dash + food_dash + activities_dash}`}/>
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#3B82F6" strokeWidth="22" strokeDasharray={`${transport_dash} ${circumference}`} strokeDashoffset="0" />
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#8B5CF6" strokeWidth="22" strokeDasharray={`${accommodation_dash} ${circumference}`} strokeDashoffset={`-${transport_dash}`} />
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#F59E0B" strokeWidth="22" strokeDasharray={`${food_dash} ${circumference}`} strokeDashoffset={`-${transport_dash + accommodation_dash}`} />
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#10B981" strokeWidth="22" strokeDasharray={`${activities_dash} ${circumference}`} strokeDashoffset={`-${transport_dash + accommodation_dash + food_dash}`} />
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#EF4444" strokeWidth="22" strokeDasharray={`${shopping_dash} ${circumference}`} strokeDashoffset={`-${transport_dash + accommodation_dash + food_dash + activities_dash}`} />
               </svg>
               <div className="donut-center">
                 <div className="donut-total">₹{totalBudget.toLocaleString()}</div>

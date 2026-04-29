@@ -278,9 +278,9 @@ export default function App() {
   const pages = {
     home: <Home onVibeSelect={handleVibeClick} onDestinationSelect={handleDestinationSelect} />,
     plan: <Plan tripData={tripData} onTripDataChange={setTripData} />,
-    itinerary: <Itinerary tripData={tripData} destination={selectedDestination} />,
-    map: <MapView />,
-    budget: <Budget tripData={tripData} />,
+    itinerary: <Itinerary tripData={tripData} destination={selectedDestination} onNavigate={setActivePage} />,
+    map: <MapView destination={selectedDestination} />,
+    budget: <Budget tripData={tripData} destination={selectedDestination} />,
     checklists: <Checklists />,
     explore: <Explore selectedVibe={selectedVibe} />,
     profile: <Profile />,

@@ -81,8 +81,8 @@ export default function Profile() {
         <div className="topbar-actions">
           <div className="icon-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
           </div>
           <div className="avatar" style={{ background: avatarColors[profile.avatarColor] }}>{avatarLetter}</div>
@@ -159,17 +159,6 @@ export default function Profile() {
 
         {/* ── Right column ── */}
         <div>
-          <div className="premium-card" style={{ marginBottom: 16 }}>
-            <div style={{ fontSize: 24, marginBottom: 8 }}>👑</div>
-            <h3>Go Premium</h3>
-            <ul className="premium-features">
-              <li>Up to 30% off on bookings</li>
-              <li>Priority customer support</li>
-              <li>Exclusive travel deals</li>
-              <li>Advanced trip planning</li>
-            </ul>
-            <button className="btn" style={{ background: 'white', color: '#D97706', width: '100%', justifyContent: 'center', fontSize: 13 }}>Upgrade Now</button>
-          </div>
 
           <div className="card">
             <div className="card-title" style={{ marginBottom: 14 }}>🏅 Travel Badges</div>

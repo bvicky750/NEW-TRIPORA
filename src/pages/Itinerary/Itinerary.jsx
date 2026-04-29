@@ -211,7 +211,7 @@ const sampleItineraryData = {
   ],
 };
 
-export default function Itinerary({ tripData, destination }) {
+export default function Itinerary({ tripData, destination, onNavigate }) {
   const days = destination?.itinerary.length || tripData?.days || 5;
   const [activeDay, setActiveDay] = useState(1);
 
@@ -220,7 +220,7 @@ export default function Itinerary({ tripData, destination }) {
 
   // Get itinerary items for active day
   let itineraryItems = [];
-  
+
   if (destination && destination.itinerary) {
     // Get activities for the selected day from destination itinerary
     const dayData = destination.itinerary.find(d => d.day === activeDay);
@@ -328,7 +328,8 @@ export default function Itinerary({ tripData, destination }) {
               </div>
             </div>
           </div>
-          <button className="btn btn-primary btn-full">✏️ Edit Plan</button>
+          <button className="btn btn-primary btn-full" onClick={() => onNavigate && onNavigate('budget')} style={{ background: '#10B981', color: 'white', border: 'none', marginBottom: '10px' }}>💰 Check {destination?.name || 'Trip'} Budget</button>
+          <button className="btn btn-outline btn-full" style={{ border: '1px solid var(--border)', background: 'white', color: 'var(--text)' }}>✏️ Edit Plan</button>
         </div>
       </div>
     </div>
