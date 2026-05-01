@@ -23,7 +23,6 @@ const defaultPlaces = [
   { query: 'Beach Resort Maldives', emoji: '🏖️', vibe: 'Relaxation', name: 'Beach Resort' },
 ];
 
-
 function Modal({ card, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -133,7 +132,7 @@ export default function Explore({ selectedVibe }) {
     }
   );
 
-  // Use API data
+  // Use API data, fallback to default structure for display
   const cards = apiPlaces.length > 0 ? apiPlaces : [];
 
   // Update active filter when selected vibe changes from Home page
@@ -204,8 +203,10 @@ export default function Explore({ selectedVibe }) {
 
       <div className="explore-grid">
         {placesLoading ? (
+          // Show loading skeletons
           Array(6).fill(0).map((_, i) => <LoadingCard key={i} />)
         ) : filteredCards.length > 0 ? (
+          // Show loaded cards
           filteredCards.map((card, i) => (
             <div 
               key={i} 
@@ -240,6 +241,7 @@ export default function Explore({ selectedVibe }) {
             </div>
           ))
         ) : (
+          // Show no results message
           <div className="no-results">
             <p>No places found matching your criteria</p>
           </div>

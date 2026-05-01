@@ -19,7 +19,7 @@ const pins = [
   { left: '82%', top: '16%', color: '#EC4899', label: 'Mall Road', num: 6 },
 ];
 
-export default function MapView({ destination }) {
+export default function MapView({ destination, onNavigate }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeLocation, setActiveLocation] = useState('');
 
@@ -101,6 +101,11 @@ export default function MapView({ destination }) {
         </div>
 
         <div className="card">
+          <div className="card-title" style={{ marginBottom: 16 }}>About {mapLocation}</div>
+          <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 20 }}>
+            {destination?.description || `Explore the beautiful highlights and hidden gems of ${mapLocation}.`}
+          </div>
+
           <div className="card-title" style={{ marginBottom: 16 }}>Route Stops</div>
           <div className="route-list">
             {currentRouteStops.map((stop, i) => (
@@ -114,8 +119,9 @@ export default function MapView({ destination }) {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 16 }}>
-            <button className="btn btn-primary btn-full">🗺️ Optimize Route</button>
+          <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <button className="btn btn-primary btn-full" onClick={() => onNavigate && onNavigate('itinerary')}>📅 View Itinerary</button>
+            <button className="btn btn-outline btn-full">🗺️ Optimize Route</button>
           </div>
         </div>
       </div>

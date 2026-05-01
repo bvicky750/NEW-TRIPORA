@@ -39,8 +39,8 @@ export default function Profile() {
   });
 
   const [profile, setProfile] = useState({
-    name: 'Ananya Singh',
-    email: 'ananya.singh@email.com',
+    name: 'Adithya',
+    email: 'adithya@email.com',
     phone: '+91 98765-43210',
     bio: 'Passionate traveler exploring the world one trip at a time. ✈️',
     location: 'Mumbai, India',

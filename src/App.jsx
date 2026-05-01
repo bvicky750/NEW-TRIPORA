@@ -275,11 +275,29 @@ export default function App() {
     setActivePage('itinerary');
   };
 
+  const handleDestinationSearch = (searchName) => {
+    if (!searchName.trim()) return;
+    let dest = destinationData[searchName] || Object.values(destinationData).find(d => d.name.toLowerCase() === searchName.toLowerCase());
+    if (!dest) {
+      dest = {
+        name: searchName,
+        location: searchName,
+        emoji: '🌍',
+        gradient: 'linear-gradient(135deg,#667eea,#764ba2)',
+        rating: '4.5',
+        description: `Explore the wonderful destination of ${searchName}. Discover its unique culture, scenic views, and local experiences.`,
+        itinerary: []
+      };
+    }
+    setSelectedDestination(dest);
+    setActivePage('map');
+  };
+
   const pages = {
-    home: <Home onVibeSelect={handleVibeClick} onDestinationSelect={handleDestinationSelect} />,
+    home: <Home onVibeSelect={handleVibeClick} onDestinationSelect={handleDestinationSelect} onNavigate={setActivePage} onSearch={handleDestinationSearch} />,
     plan: <Plan tripData={tripData} onTripDataChange={setTripData} />,
     itinerary: <Itinerary tripData={tripData} destination={selectedDestination} onNavigate={setActivePage} />,
-    map: <MapView destination={selectedDestination} />,
+    map: <MapView destination={selectedDestination} onNavigate={setActivePage} />,
     budget: <Budget tripData={tripData} destination={selectedDestination} />,
     checklists: <Checklists />,
     explore: <Explore selectedVibe={selectedVibe} />,

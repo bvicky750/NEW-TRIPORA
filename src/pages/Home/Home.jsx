@@ -29,9 +29,16 @@ const destinationDetails = {
   Switzerland: { image: SwitzerlandImg, emoji: '🏔️', gradient: 'linear-gradient(135deg,#43e97b,#38f9d7)', loc: 'Switzerland, Europe', rating: '4.9', desc: 'A stunning alpine country with breathtaking mountains, lakes, and charming villages.' },
 };
 
-export default function Home({ onVibeSelect, onDestinationSelect }) {
+export default function Home({ onVibeSelect, onDestinationSelect, onNavigate, onSearch }) {
   const [activeVibes, setActiveVibes] = useState([]);
   const [selectedDestModal, setSelectedDestModal] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchClick = () => {
+    if (onSearch && searchQuery.trim()) {
+      onSearch(searchQuery);
+    }
+  };
 
   const toggleVibe = (name) => {
     setActiveVibes(prev =>
@@ -72,7 +79,7 @@ export default function Home({ onVibeSelect, onDestinationSelect }) {
               <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
           </div>
-          <div className="avatar">A</div>
+          <div className="avatar" onClick={() => onNavigate && onNavigate('profile')} style={{ cursor: 'pointer' }}>A</div>
         </div>
       </div>
 
@@ -92,8 +99,13 @@ export default function Home({ onVibeSelect, onDestinationSelect }) {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
-            <input placeholder="Search destinations, trips..." />
-            <button className="search-btn">Search</button>
+            <input
+              placeholder="Search destinations, trips..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
+            />
+            <button className="search-btn" onClick={handleSearchClick}>Search</button>
           </div>
         </div>
       </div>
